@@ -155,4 +155,4 @@
             return new Date(dateStr);
         }
     });
-})(jQuery, Date, clearInterval, setInterval, this.define);
+})(this.jQuery, Date, clearInterval, setInterval, this.define);

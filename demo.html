@@ -1,0 +1,25 @@
+<html>
+<head>
+    <script src="http://requirejs.org/docs/release/2.1.15/minified/require.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <script src="jQuery.friendlyTime.js"></script> -->
+</head>
+<body>
+    <span class="date" data-time="2014-11-10T01:52:20Z">...</span>
+    <br/>
+    <span class="date date_ready" data-time="2014-11-10T01:52:20Z">Just Now</span>
+    <script type="text/javascript">
+        require([ 'jquery', 'jQuery.friendlyTime' ], function($) {
+            //$.fn.friendlyTime.DURATION = 1000;
+            $('.date.date_ready').friendlyTime({ skipInit: true });
+            
+            // Given the above, this could also be $('.date:not(.date_ready)'), but not 
+            // necessary. friendlyTime won't track already-tracked elements more than once.
+            $('.date').friendlyTime({ 
+                //suppressFuture: true, 
+                //nowWindow: 5 
+            });
+        });
+    </script>
+</body>
+</html>

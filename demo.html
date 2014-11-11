@@ -5,12 +5,12 @@
     <!-- <script src="jQuery.friendlyTime.js"></script> -->
 </head>
 <body>
-    <span class="date" data-time="2014-11-10T01:52:20Z">...</span>
+    <span class="date" data-time="2014-11-11T07:12:30Z">...</span>
     <br/>
     <span class="date date_ready" data-time="2014-11-10T01:52:20Z">Just Now</span>
     <script type="text/javascript">
         require([ 'jquery', 'jQuery.friendlyTime' ], function($) {
-            //$.fn.friendlyTime.DURATION = 1000;
+            $.fn.friendlyTime.DURATION = 1000;
             $('.date.date_ready').friendlyTime({ skipInit: true });
             
             // Given the above, this could also be $('.date:not(.date_ready)'), but not 
@@ -19,6 +19,11 @@
                 //suppressFuture: true, 
                 //nowWindow: 5 
             });
+            
+            setTimeout(function(){
+            	//$('.date').friendlyTime({ stopUpdates: true });
+            	$('.date').remove();
+            }, 5000);
         });
     </script>
 </body>

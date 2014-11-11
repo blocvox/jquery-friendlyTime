@@ -40,23 +40,7 @@
             if (!opts) opts = {};
 
             if (opts.stopUpdates) {
-                this.each(function() {
-                    var $el, i, thiz = this;
-
-                    for (i = 0; i < all$Els.length; i++) {
-                        $el = all$Els[i];
-                        if ($el[0] !== thiz) continue;
-
-                        // If the element was already detached, the next line is a NOOP (courtesy of jQuery
-                        // detach logic).
-                        $el.removeData('friendlyTime');
-
-                        all$Els.splice(i, 1);
-                        break;
-                    }
-
-                    // stopUpdate element not found.
-                });
+                this.each(stopUpdates);
 
                 return;
             }
@@ -105,13 +89,32 @@
                 // If friendlyTime isn't told to stop updating a detached element, the element
                 // will remain in our update set, but it's data() will be wiped (except for
                 // html data attrs) by jQuery when it was detached.
-                if (opts === undefined) {
-                    // Detached element.
+                if (typeof opts === "undefined") {
+                    // Detached element. Stop tracking it for updates.
+                    stopUpdates.call(this);
                     return;
                 }
 
                 $el.text(toRelativeString(utcDate, opts.suppressFuture, opts.nowWindow));
             });
+        }
+        
+        function stopUpdates(){
+			var $el, i, thiz = this;
+
+			for (i = 0; i < all$Els.length; i++) {
+				$el = all$Els[i];
+				if ($el[0] !== thiz) continue;
+
+				// If the element was already detached, the next line is a NOOP (courtesy of jQuery
+				// detach logic).
+				$el.removeData('friendlyTime');
+
+				all$Els.splice(i, 1);
+				break;
+			}
+
+			// stopUpdate element not found.
         }
 
         function toRelativeString(time, suppressFuture, nowWindow) {

@@ -100,21 +100,21 @@
         }
         
         function stopUpdates(){
-			var $el, i, thiz = this;
+            var $el, i, thiz = this;
 
-			for (i = 0; i < all$Els.length; i++) {
-				$el = all$Els[i];
-				if ($el[0] !== thiz) continue;
+            for (i = 0; i < all$Els.length; i++) {
+                $el = all$Els[i];
+                if ($el[0] !== thiz) continue;
 
-				// If the element was already detached, the next line is a NOOP (courtesy of jQuery
-				// detach logic).
-				$el.removeData('friendlyTime');
+                // If the element was already detached, the next line is a NOOP (courtesy of jQuery
+                // detach logic).
+                $el.removeData('friendlyTime');
 
-				all$Els.splice(i, 1);
-				break;
-			}
+                all$Els.splice(i, 1);
+                break;
+            }
 
-			// stopUpdate element not found.
+            // stopUpdate element not found.
         }
 
         function toRelativeString(time, suppressFuture, nowWindow) {
